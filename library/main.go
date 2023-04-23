@@ -29,10 +29,20 @@ func signup_page(w http.ResponseWriter, r *http.Request) {
 
 	tmpl.ExecuteTemplate(w, "signup_page", nil)
 }
+func sales_page(w http.ResponseWriter, r *http.Request) {
+
+	tmpl, err := template.ParseFiles("templates/sales_page.html", "templates/header.html", "templates/footer.html")
+	if err != nil {
+		fmt.Fprintf(w, err.Error())
+	}
+	tmpl.ExecuteTemplate(w, "sales_page", nil)
+
+}
 func handleRequest() {
 	http.HandleFunc("/", home_page)
 	http.HandleFunc("/signup_page/", signup_page)
 	//http.HandleFunc("/contacts/", contact_page)
+	http.HandleFunc("/sales_page/", sales_page)
 	http.ListenAndServe(":3333", nil)
 }
 
